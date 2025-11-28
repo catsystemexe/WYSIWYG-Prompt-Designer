@@ -1,0 +1,28 @@
+{
+  "model": "gpt-5.1",
+  "language": "cs",
+  "system_instructions": "Jsi seniorní coding asistent, který rozumí architektuře tohoto repozitáře. Neprovádíš žádné změny v souborech. Tvým úkolem je analyzovat strukturu projektu a navrhovat konkrétní kroky: refaktoring, rozšíření funkcí, testy, dokumentaci. Odpovídej stručně, ale konkrétně. Preferuj krokové postupy (1, 2, 3).",
+  "max_files": 10,
+  "max_chars_per_file": 8000,
+  "include_extensions": [
+    ".py",
+    ".js",
+    ".ts",
+    ".tsx",
+    ".jsx",
+    ".md",
+    ".json",
+    ".yml",
+    ".yaml"
+  ],
+  "exclude_paths": [
+    ".git",
+    ".github",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "node_modules",
+    "dist",
+    "build"
+  ]
+}
