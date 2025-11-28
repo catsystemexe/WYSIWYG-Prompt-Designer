@@ -1,0 +1,56 @@
+// super-minimalni test skriptu
+
+// 1) Úplně první signál, že se soubor načetl:
+document.addEventListener('DOMContentLoaded', () => {
+  // vytvořím výrazný pruh nahoře
+  const bar = document.createElement('div');
+  bar.textContent = 'JS běží ✅';
+  bar.style.position = 'fixed';
+  bar.style.top = '0';
+  bar.style.left = '0';
+  bar.style.right = '0';
+  bar.style.zIndex = '99999';
+  bar.style.background = '#008000';
+  bar.style.color = '#fff';
+  bar.style.padding = '6px 10px';
+  bar.style.fontFamily = 'monospace';
+  document.body.appendChild(bar);
+
+  // 2) Zkusím najít #canvas a něco do něj nacpat
+  const canvas = document.getElementById('canvas');
+  if (!canvas) {
+    const warn = document.createElement('div');
+    warn.textContent = '⚠️ Nenalezen element #canvas';
+    warn.style.margin = '16px';
+    warn.style.color = 'yellow';
+    document.body.appendChild(warn);
+    return;
+  }
+
+  canvas.innerHTML = '';
+  const box = document.createElement('div');
+  box.textContent = 'Testovací obsah z JS (render OK)';
+  box.style.background = '#222';
+  box.style.color = '#fff';
+  box.style.padding = '20px';
+  box.style.borderRadius = '8px';
+  canvas.appendChild(box);
+});
+
+// 3) úplně hrubý fallback – kdyby byl nějaký runtime error po načtení
+window.onerror = function (msg, src, line, col, err) {
+  const box = document.createElement('div');
+  box.style.position = 'fixed';
+  box.style.bottom = '0';
+  box.style.left = '0';
+  box.style.right = '0';
+  box.style.background = '#300';
+  box.style.color = '#fff';
+  box.style.padding = '10px';
+  box.style.fontFamily = 'monospace';
+  box.style.fontSize = '12px';
+  box.style.zIndex = '99999';
+  box.textContent =
+    '[JS ERROR] ' + msg + ' @ ' + src + ':' + line + ':' + col;
+  document.body.appendChild(box);
+};

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Layout Builder · Light WYSIWYG</title>
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Layout Builder · Light WYSIWYG</div>
+    <div class="slot-bar">
+      <button id="slot1Btn">Slot 1</button>
+      <button id="slot2Btn">Slot 2</button>
+      <button id="slot3Btn">Slot 3</button>
+      <button id="slot4Btn">Slot 4</button>
+      <button id="slot5Btn">Slot 5</button>
+      <button id="renameSlotBtn">Rename</button>
+    </div>
+
+    
+    <div class="tools">
+      <label class="switch"><input id="toggleLayoutMode" type="checkbox" checked><span>Layout mód</span></label>
+      <button id="btnNewRow" type="button">Nová řada</button>
+      <button id="btnExport"  type="button">Export</button>
+      <button id="btnImport"  type="button">Import</button>
+      <button id="btnRandom"  type="button">Random</button>
+      <input id="importFile" type="file" hidden>
+    </div>
+  </header>
+
+  <main id="canvas" class="canvas"></main>
+
+  <script src="app.js?v=32" defer></script>
+</body>
+</html>
