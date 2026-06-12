@@ -142,29 +142,24 @@ H1 → H2 (sekce) → H3 (karty/FAQ otázky).
 5. Soc. profily (FB horolezeckyservis, IG sluzbyhorolezcu.cz, YouTube) —
    přenést do patičky a `sameAs`.
 
-## 7) Otevřené otázky před Fází 3
+## 7) Otevřené otázky — ROZHODNUTO (uživatel, 12. 6. 2026)
 
-**Q1 — Odkaz na vyskovepraceandel.cz:** má zůstat výrazný funnel (původní
-chování), zredukovat na jeden decentní odkaz (doporučeno kvůli doorway riziku,
-audit A2), nebo úplně odstranit? S tím souvisí i e-mail
-info@vyskovepraceandel.cz — ponechat, nebo nahradit?
+**Q1 — Odkaz na vyskovepraceandel.cz:** ✅ **Jeden decentní odkaz** v sekci
+kontakt („Více referencí na vyskovepraceandel.cz"). E-mail
+info@vyskovepraceandel.cz zůstává.
 
-**Q2 — Identifikace firmy:** v ARES jsem dohledal pravděpodobný subjekt:
-**Lukáš Anděl, IČO 76652301**, sídlo Sedlečko 5, 391 37 Chotoviny (okres
-Tábor), podniká od 2009, DIČ CZ8805061826, obory NACE zahrnují natěračské
-práce — sedí na lokality ze sitemapy (Tábor, Benešov, Praha). IČO 64133500
-z odkazu na poptavej.cz v ARES neexistuje (je to interní ID poptavej.cz).
-→ Potvrdit správnost subjektu a zda zveřejnit i adresu sídla (je to zřejmě
-domácí adresa — kvůli soukromí lze uvést jen IČO + „Táborsko").
+**Q2 — Identifikace firmy:** ✅ Použít subjekt z ARES — **Lukáš Anděl,
+IČO 76652301** (podniká od 2009, DIČ CZ8805061826), **bez zveřejnění adresy
+sídla** (soukromí). V patičce jméno + IČO + působnost; ve schema jen
+`areaServed`, žádné `address`/`geo`. (IČO 64133500 z poptavej.cz je interní
+ID, v ARES neexistuje.)
 
-**Q3 — Primární lokalita pro GEO:** co dát do `<title>`/description jako
-hlavní oblast? Podklady ukazují Praha (12 městských částí), Benešov,
-Táborsko (sídlo), Ostrava. Vše do `areaServed` dát lze, ale titulek unese
-1–2 lokality.
+**Q3 — Primární lokalita pro GEO:** ✅ **Praha a Střední Čechy + Táborsko /
+jižní Čechy** — obě do `<title>`, description i hero textu; Ostravsko a
+ostatní jen v `areaServed` a textu sekce kontakt.
 
-**Q4 — Role druhého čísla +420 722 093 256:** jaký popisek k němu uvést
-(druhý technik / dispečink / společník…)? Z webu to neplyne.
+**Q4 — Druhé číslo +420 722 093 256:** ✅ **Bez popisku** — obě čísla uvést
+rovnocenně vedle sebe.
 
-**Q5 — (volitelné) Měření návštěvnosti:** původní web měl 4 rozbité/duplicitní
-trackery; do nové verze zatím žádný nedávám. Chcete později nasadit GA4, nebo
-nechat web bez analytiky?
+**Q5 — Analytika:** žádný tracker v první verzi (výchozí stav; GA4 lze
+doplnit později na pokyn).
