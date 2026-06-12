@@ -1,0 +1,393 @@
+/* ====================================================================
+   Výškové práce Anděl — sluzbyhorolezcu.cz
+   Čisté CSS, bez závislostí. Tmavé schéma navazuje na původní web,
+   ale s kontrastem ≥ 4,5:1 (WCAG AA).
+   ==================================================================== */
+
+:root {
+  --bg: #14181d;
+  --surface: #1d242c;
+  --surface-2: #232c36;
+  --text: #e8ecf1;
+  --muted: #aab4c0;
+  --accent: #f7c948;        /* navazuje na původní žlutou, kontrast 10,9:1 na --bg */
+  --accent-ink: #1c1605;
+  --border: #313b47;
+  --header-h: 72px;
+  --radius: 10px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--accent); }
+a:hover { color: #ffe08a; }
+
+h1, h2, h3 { line-height: 1.25; margin: 0 0 .5em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: 1.05rem; }
+
+.container {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section { padding: 72px 0; scroll-margin-top: calc(var(--header-h) + 12px); }
+
+.section-lead {
+  max-width: 56ch;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+/* --- přístupnost ------------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 10px 16px;
+  z-index: 100;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- header ------------------------------------------------------- */
+
+#site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(20, 24, 29, .55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid transparent;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.header-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 20px;
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  transition: min-height .25s ease;
+}
+
+#site-header.shrunk {
+  background: rgba(16, 20, 25, .92);
+  border-bottom-color: var(--border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .3);
+}
+#site-header.shrunk .header-inner { min-height: 58px; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+.brand strong { color: var(--accent); }
+.brand img { width: 44px; height: 44px; transition: width .25s ease, height .25s ease; }
+#site-header.shrunk .brand img { width: 34px; height: 34px; }
+
+nav { margin-left: auto; }
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  display: block;
+  padding: 8px 12px;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background .15s ease, color .15s ease;
+}
+.nav-links a:hover { background: var(--surface-2); color: var(--accent); }
+
+/* --- tlačítka ------------------------------------------------------ */
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { background: #ffd95e; color: var(--accent-ink); }
+
+.btn-ghost {
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-header { margin-left: auto; padding: 9px 16px; white-space: nowrap; }
+nav + .btn-header { margin-left: 0; }
+
+/* --- hero ----------------------------------------------------------- */
+
+#hero {
+  position: relative;
+  min-height: min(86vh, 760px);
+  display: flex;
+  align-items: center;
+  padding: 120px 0;
+  margin-top: calc(-1 * var(--header-h));
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* fotka + tmavý overlay řeší původní problém s kontrastem textu na fotce;
+   --parallax nastavuje fx.js (desktop, bez prefers-reduced-motion) */
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: -40px 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(13, 16, 20, .78) 0%, rgba(13, 16, 20, .62) 55%, var(--bg) 100%),
+    url("../img/hero.webp") center / cover no-repeat;
+  transform: translateY(var(--parallax, 0px));
+  will-change: transform;
+}
+
+#hero-sentinel { position: absolute; top: 0; height: 1px; width: 1px; }
+
+.hero-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: var(--header-h) 20px 0;
+}
+
+#hero h1 {
+  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  max-width: 18ch;
+  text-wrap: balance;
+}
+
+.hero-sub {
+  max-width: 52ch;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+.hero-sub strong { color: var(--text); }
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 1.6rem 0 1rem;
+}
+
+.hero-trust {
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+/* --- karty služeb ---------------------------------------------------- */
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: #46525f;
+}
+.card h3 { color: var(--accent); }
+.card p { margin: 0; color: var(--muted); }
+
+/* --- proč my ---------------------------------------------------------- */
+
+.split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 20px;
+}
+.facts h3 { margin-bottom: .15em; }
+.facts p { margin: 0; color: var(--muted); }
+
+.split figure { margin: 0; }
+.split img {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.split figcaption {
+  margin-top: .6rem;
+  font-size: .85rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* --- FAQ --------------------------------------------------------------- */
+
+#faq details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+#faq summary {
+  cursor: pointer;
+  padding: 16px 20px;
+  font-weight: 600;
+  list-style: none;
+  position: relative;
+  padding-right: 48px;
+  transition: background .15s ease;
+}
+#faq summary::-webkit-details-marker { display: none; }
+#faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  translate: 0 -50%;
+  font-size: 1.3rem;
+  color: var(--accent);
+  transition: rotate .2s ease;
+}
+#faq details[open] summary::after { rotate: 45deg; }
+#faq summary:hover { background: var(--surface-2); }
+#faq details p { margin: 0; padding: 0 20px 18px; color: var(--muted); }
+
+/* --- kontakt ------------------------------------------------------------ */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+.contact-card h3 { color: var(--muted); font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; }
+.contact-card p { margin: 0 0 .8rem; }
+
+.contact-link {
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.contact-link:hover { text-decoration: underline; }
+.contact-note { color: var(--muted); font-size: .88rem; }
+
+.references { margin-top: 2rem; color: var(--muted); }
+
+/* --- patička -------------------------------------------------------------- */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  color: var(--muted);
+  font-size: .92rem;
+}
+.footer-inner { display: grid; gap: 14px; }
+.social {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+}
+.copyright { margin: 0; }
+
+/* --- scroll-reveal (aktivní jen s JS, html.js přidává fx.js) -------------- */
+
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s ease-out, transform .5s ease-out;
+}
+html.js .reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- responzivita ----------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .split { grid-template-columns: 1fr; }
+  .split figure { order: -1; max-width: 480px; }
+}
+
+@media (max-width: 760px) {
+  .nav-links { display: none; }   /* sekce jsou dostupné scrollem, CTA zůstává */
+  .btn-header { margin-left: auto; }
+  section { padding: 56px 0; }
+}
+
+/* --- prefers-reduced-motion: animace POVINNĚ vypnout ------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html { scroll-behavior: auto; }
+  html.js .reveal { opacity: 1; transform: none; }
+  #hero::before { will-change: auto; }
+}
