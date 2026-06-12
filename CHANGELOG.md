@@ -1,6 +1,6 @@
 # CHANGELOG — rekonstrukce sluzbyhorolezcu.cz (Fáze 3)
 
-Nový web ve složce `web/` (index.html 14 kB, style.css 9 kB, fx.js 2 kB,
+Nový web ve složce `docs/` (index.html 14 kB, style.css 9 kB, fx.js 2 kB,
 obrázky 422 kB — celkem 448 kB; původní homepage stahovala přes 1 MB
 a desítky requestů WordPressu).
 
@@ -84,7 +84,7 @@ a desítky requestů WordPressu).
    sekce referencí/ceník lze doplnit, až budou ověřené podklady.
 4. **Role druhého čísla** — popisek „druhý technik" dle zadání; pokud má
    číslo konkrétního vlastníka/jméno, upřesnit.
-5. **Nasazení**: web je čistá statika — stačí nahrát obsah `web/` do rootu
+5. **Nasazení**: web je čistá statika — stačí nahrát obsah `docs/` do rootu
    hostingu. Při nasazení na doménu zachovat cesty (`/img/...`), og:image
    míří na https://sluzbyhorolezcu.cz/img/…. Zvážit 301 přesměrování
    25 starých podstránek ze sitemapy (viz `_zdroj/page-sitemap.xml`) na
